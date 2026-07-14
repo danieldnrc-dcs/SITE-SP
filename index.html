@@ -3,277 +3,354 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Claro S.A. Brasil — Resultados 2020–2024</title>
+<title>Claro S.A. (Grupo Embratel) — Débitos junto ao Município de São Paulo</title>
 <style>
   :root{
-    color-scheme: light;
-    --plane:#f9f9f7; --surface:#fcfcfb;
-    --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
-    --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,0.10);
-    --receita:#2a78d6;  /* blue  */
-    --ebitda:#1baf7a;   /* aqua  */
-    --lucro:#eda100;    /* yellow */
-    --good:#006300;
-    --shadow:0 1px 2px rgba(11,11,11,.05),0 8px 24px rgba(11,11,11,.06);
-  }
-  @media (prefers-color-scheme: dark){
-    :root:where(:not([data-theme="light"])){
-      color-scheme: dark;
-      --plane:#0d0d0d; --surface:#1a1a19;
-      --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
-      --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,0.10);
-      --receita:#3987e5; --ebitda:#199e70; --lucro:#c98500; --good:#0ca30c;
-      --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.5);
-    }
-  }
-  :root[data-theme="dark"]{
     color-scheme: dark;
-    --plane:#0d0d0d; --surface:#1a1a19;
-    --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
-    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,0.10);
-    --receita:#3987e5; --ebitda:#199e70; --lucro:#c98500; --good:#0ca30c;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.5);
+    --bg:#080b09; --panel:#0d1310; --panel-2:#0a0f0c;
+    --line:rgba(120,200,150,.14); --line-2:rgba(120,200,150,.22);
+    --green:#37d97f; --green-dim:#1f6b45;
+    --blue:#4cb5f5; --amber:#f2c14e; --red:#f2584b; --red-dim:#5a1f1c;
+    --ink:#e9f2ec; --ink-2:#93a49b; --muted:#5d6b63;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
   }
-
   *{box-sizing:border-box}
   html,body{margin:0}
-  body{
-    background:var(--plane); color:var(--ink);
-    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
-    line-height:1.5; -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:980px; margin:0 auto; padding:40px 20px 64px}
-  header.page{margin-bottom:28px}
-  .eyebrow{font-size:.8rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--receita); margin:0 0 6px}
-  h1{font-size:clamp(1.6rem,4vw,2.3rem); margin:0 0 8px; letter-spacing:-.02em}
-  .sub{color:var(--ink-2); margin:0; max-width:66ch}
+  body{background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.5; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px; margin:0 auto; padding:32px 18px 72px}
+  a{color:var(--green)}
 
-  /* KPI tiles */
-  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; margin:28px 0}
-  .tile{background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:16px 18px; box-shadow:var(--shadow)}
-  .tile .label{font-size:.78rem; color:var(--ink-2); margin:0 0 6px; font-weight:600}
-  .tile .val{font-size:1.85rem; font-weight:700; letter-spacing:-.02em; margin:0; font-variant-numeric:tabular-nums}
-  .tile .delta{font-size:.82rem; margin:4px 0 0; color:var(--good); font-weight:600}
-  .tile .delta.neutral{color:var(--muted)}
+  /* header */
+  .eyebrow{font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; color:var(--green); margin:0 0 10px; text-transform:uppercase}
+  h1{font-size:clamp(1.4rem,3.6vw,2.1rem); margin:0 0 10px; letter-spacing:-.02em; line-height:1.15}
+  .lead{color:var(--ink-2); margin:0; max-width:74ch; font-size:.98rem}
+  .rule{height:1px; background:var(--line); border:0; margin:24px 0}
 
-  .card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:22px 22px 14px; box-shadow:var(--shadow); margin:22px 0}
-  .card h2{font-size:1.05rem; margin:0 0 2px; letter-spacing:-.01em}
-  .card .note{font-size:.82rem; color:var(--muted); margin:0 0 14px}
+  /* número-chave hero */
+  .hero{border:1.5px solid var(--red); border-radius:16px; padding:22px 22px 20px; margin:22px 0;
+        background:radial-gradient(120% 140% at 0% 0%, rgba(242,88,75,.10), transparent 60%), var(--panel)}
+  .hero .tag{display:inline-block; font-family:var(--mono); font-size:.68rem; letter-spacing:.12em; color:var(--red);
+             border:1px solid var(--red); border-radius:999px; padding:4px 12px; text-transform:uppercase; margin-bottom:14px}
+  .hero .big{font-family:var(--mono); font-size:clamp(2.4rem,8vw,3.6rem); font-weight:700; color:var(--red); line-height:1; margin:0}
+  .hero .big small{font-size:.4em; font-weight:600}
+  .hero h2{font-size:1.15rem; margin:6px 0 12px}
+  .hero p{color:var(--ink-2); margin:0; max-width:70ch; font-size:.95rem}
+  .hero .hl{color:var(--red); font-weight:600}
+  .hero .ok{color:var(--green); font-weight:600}
 
-  /* legend */
-  .legend{display:flex; flex-wrap:wrap; gap:16px; margin:0 0 6px; font-size:.85rem; color:var(--ink-2)}
+  /* KPI grid */
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(158px,1fr)); gap:1px; background:var(--line);
+        border:1px solid var(--line); border-radius:14px; overflow:hidden; margin:20px 0}
+  .kpi{background:var(--panel); padding:16px 16px 14px}
+  .kpi .k-label{font-family:var(--mono); font-size:.66rem; letter-spacing:.1em; color:var(--muted); text-transform:uppercase; margin:0 0 8px}
+  .kpi .k-val{font-family:var(--mono); font-size:1.5rem; font-weight:700; color:var(--green); margin:0; line-height:1.05}
+  .kpi .k-val.red{color:var(--red)} .kpi .k-val.amber{color:var(--amber)}
+  .kpi .k-sub{font-size:.76rem; color:var(--ink-2); margin:6px 0 0}
+
+  /* section */
+  section{margin:34px 0}
+  .s-num{font-family:var(--mono); font-size:.72rem; letter-spacing:.12em; color:var(--green); text-transform:uppercase; margin:0 0 6px}
+  h3.s-title{font-size:1.25rem; margin:0 0 4px; letter-spacing:-.01em}
+  .s-desc{color:var(--ink-2); margin:0 0 18px; font-size:.92rem; max-width:76ch}
+
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px}
+  .card + .card{margin-top:14px}
+
+  /* legend + chart */
+  .legend{display:flex; flex-wrap:wrap; gap:16px; margin:0 0 10px; font-size:.82rem; color:var(--ink-2); font-family:var(--mono)}
   .legend span{display:inline-flex; align-items:center; gap:7px}
-  .swatch{width:11px; height:11px; border-radius:3px; display:inline-block}
-
+  .sw{width:11px; height:11px; border-radius:3px; display:inline-block}
+  .sw.line{width:16px; height:0; border-top:2px dashed var(--red); border-radius:0}
   .chart-scroll{overflow-x:auto}
-  svg{display:block; width:100%; height:auto; min-width:520px}
-  .bar{transition:opacity .12s}
-  .bar:hover{opacity:.82; cursor:default}
-  .blabel{font-size:11px; font-weight:600; fill:var(--ink); font-variant-numeric:tabular-nums}
-  .axislabel{font-size:11px; fill:var(--muted); font-variant-numeric:tabular-nums}
-  .yearlabel{font-size:12.5px; font-weight:600; fill:var(--ink-2)}
+  svg{display:block; width:100%; height:auto; min-width:560px}
+  .g-label{font-family:var(--mono); font-size:11px; font-weight:600; fill:var(--green)}
+  .g-label.b{fill:var(--blue)}
+  .g-axis{font-family:var(--mono); font-size:10.5px; fill:var(--muted)}
+  .g-year{font-family:var(--mono); font-size:12px; font-weight:600; fill:var(--ink-2)}
+  .g-debt{font-family:var(--mono); font-size:10.5px; font-weight:700; fill:var(--red)}
+  .bar{transition:opacity .12s} .bar:hover{opacity:.8}
 
-  /* table */
-  table{width:100%; border-collapse:collapse; font-size:.9rem; font-variant-numeric:tabular-nums}
-  caption{text-align:left; font-size:.82rem; color:var(--muted); margin-bottom:10px}
-  th,td{padding:9px 10px; text-align:right; border-bottom:1px solid var(--border)}
-  th:first-child,td:first-child{text-align:left; font-variant-numeric:normal}
-  thead th{font-size:.78rem; color:var(--ink-2); border-bottom:1.5px solid var(--axis)}
-  tbody tr:last-child td{border-bottom:none}
-  tbody tr:hover{background:color-mix(in srgb, var(--receita) 7%, transparent)}
-  .na{color:var(--muted)}
+  /* breakdown bars */
+  .brk{display:flex; flex-direction:column; gap:11px}
+  .brk-row{display:grid; grid-template-columns:150px 1fr auto; gap:12px; align-items:center; font-size:.86rem}
+  .brk-row .n{color:var(--ink-2)}
+  .brk-track{height:14px; background:var(--panel-2); border-radius:4px; overflow:hidden; border:1px solid var(--line)}
+  .brk-fill{height:100%; border-radius:3px}
+  .brk-row .v{font-family:var(--mono); color:var(--ink); font-size:.82rem; white-space:nowrap}
+  .brk-row .v b{color:var(--green)}
 
-  .foot{font-size:.8rem; color:var(--muted); margin-top:26px; line-height:1.7}
-  .foot a{color:var(--receita)}
-  .foot h3{font-size:.82rem; color:var(--ink-2); margin:0 0 6px; text-transform:uppercase; letter-spacing:.06em}
-  .foot ol{margin:0 0 14px; padding-left:1.2em}
+  /* tables */
+  .tbl-scroll{overflow-x:auto}
+  table{width:100%; border-collapse:collapse; font-size:.85rem}
+  caption{text-align:left; font-size:.78rem; color:var(--muted); margin-bottom:10px; font-style:italic}
+  th,td{padding:9px 12px; text-align:right; border-bottom:1px solid var(--line); white-space:nowrap}
+  th:first-child,td:first-child{text-align:left}
+  thead th{font-family:var(--mono); font-size:.68rem; letter-spacing:.06em; color:var(--ink-2); text-transform:uppercase; border-bottom:1px solid var(--line-2)}
+  td.mono{font-family:var(--mono)}
+  td.g{color:var(--green)} td.r{color:var(--red)} td.na{color:var(--muted)}
+  tbody tr:hover{background:rgba(120,200,150,.04)}
+  tbody tr.total td{border-top:1px solid var(--line-2); font-weight:700; color:var(--ink)}
+  .pill{font-family:var(--mono); font-size:.7rem; padding:2px 7px; border-radius:5px; border:1px solid var(--green-dim); color:var(--green)}
 
-  /* tooltip */
-  #tip{position:fixed; pointer-events:none; background:var(--ink); color:var(--plane);
-       padding:7px 10px; border-radius:8px; font-size:.78rem; line-height:1.35;
-       opacity:0; transition:opacity .1s; z-index:10; white-space:nowrap; box-shadow:var(--shadow)}
-  #tip b{font-variant-numeric:tabular-nums}
+  /* source chips */
+  .src{display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:.72rem; letter-spacing:.04em;
+       color:var(--green); border:1px solid var(--green-dim); border-radius:999px; padding:6px 12px; margin:14px 8px 0 0; text-transform:uppercase}
+  .src::before{content:"▤"; opacity:.7}
+
+  /* two col */
+  .cols{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  @media(max-width:720px){ .cols{grid-template-columns:1fr} .brk-row{grid-template-columns:110px 1fr; } .brk-row .v{grid-column:1/-1; text-align:right} }
+
+  footer{margin-top:44px; padding-top:20px; border-top:1px solid var(--line); font-size:.8rem; color:var(--muted); line-height:1.7}
+  footer .warn{color:var(--amber)}
+  footer h4{font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; color:var(--ink-2); text-transform:uppercase; margin:0 0 8px}
+  footer ol{margin:0 0 14px; padding-left:1.3em}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <header class="page">
-    <p class="eyebrow">Telecom · Brasil</p>
-    <h1>Claro S.A. — Resultados Financeiros 2020–2024</h1>
-    <p class="sub">Panorama dos números divulgados pela Claro S.A. no Brasil ao longo dos últimos cinco exercícios: receita líquida, EBITDA, margem operacional e o lucro líquido reportado nas Demonstrações Financeiras (DFs) oficiais.</p>
+  <header>
+    <p class="eyebrow">CPI dos Grandes Devedores da Dívida Ativa · CMSP · 19ª Legislatura</p>
+    <h1>Claro S.A. (Grupo Embratel)<br>Débitos junto ao Município de São Paulo</h1>
+    <p class="lead">Subsídio técnico para negociação direta na Procuradoria Geral do Município. Em cada bloco: o número oficial, o que ele significa e como a dívida com SP se compara à capacidade financeira do grupo. Base <span style="font-family:var(--mono)">SEFAZ/PMSP D31284</span> (extração 2026) e dados de RI / arquivamentos na SEC.</p>
   </header>
 
-  <!-- KPIs — exercício mais recente -->
-  <section class="kpis" aria-label="Destaques de 2024">
-    <div class="tile">
-      <p class="label">Receita líquida 2024</p>
-      <p class="val">R$ 48,9 bi</p>
-      <p class="delta">▲ 6,9% vs. 2023</p>
-    </div>
-    <div class="tile">
-      <p class="label">EBITDA 2024</p>
-      <p class="val">R$ 21,7 bi</p>
-      <p class="delta">▲ 10,6% vs. 2023</p>
-    </div>
-    <div class="tile">
-      <p class="label">Margem EBITDA 2024</p>
-      <p class="val">44,5%</p>
-      <p class="delta">▲ 1,5 p.p.</p>
-    </div>
-    <div class="tile">
-      <p class="label">Receita acumulada 5 anos</p>
-      <p class="val">R$ 216,5 bi</p>
-      <p class="delta neutral">2020 – 2024</p>
-    </div>
-  </section>
-
-  <!-- Gráfico principal -->
-  <section class="card">
-    <h2>Receita líquida × EBITDA por ano</h2>
-    <p class="note">Valores em bilhões de reais (R$ bi). Escala única.</p>
-    <div class="legend">
-      <span><i class="swatch" style="background:var(--receita)"></i>Receita líquida</span>
-      <span><i class="swatch" style="background:var(--ebitda)"></i>EBITDA</span>
-    </div>
-    <div class="chart-scroll">
-      <svg id="chart" viewBox="0 0 760 400" role="img"
-           aria-label="Gráfico de barras da receita líquida e do EBITDA da Claro S.A. de 2020 a 2024"></svg>
-    </div>
-  </section>
-
-  <!-- Tabela -->
-  <section class="card">
-    <h2>Tabela consolidada</h2>
-    <div class="chart-scroll">
-      <table>
-        <caption>Claro S.A. (Brasil) — valores anuais. Lucro líquido conforme Demonstrações Financeiras consolidadas.</caption>
-        <thead>
-          <tr>
-            <th>Ano</th>
-            <th>Receita líquida</th>
-            <th>EBITDA</th>
-            <th>Margem EBITDA</th>
-            <th>Lucro líquido (consolidado)</th>
-          </tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <div class="foot">
-    <h3>Notas metodológicas</h3>
-    <ol>
-      <li><b>Receita e EBITDA</b> são os indicadores que a Claro divulga publicamente a cada balanço; os valores acima refletem os totais anuais (Brasil) reportados pela empresa e pela imprensa especializada.</li>
-      <li><b>Margem EBITDA</b> calculada como EBITDA ÷ receita líquida (2024 reportada oficialmente em 44,5%). EBITDA de 2020 (≈ R$ 16,05 bi) derivado do crescimento de 3% informado para 2021.</li>
-      <li><b>Lucro líquido:</b> ao contrário de Vivo e TIM, a Claro não destaca o lucro líquido em seus releases de imprensa — o resultado consolidado que se torna público consta apenas das Demonstrações Financeiras (DFs) arquivadas. Por isso, o lucro líquido de 2021 (R$ 3,46 bi) e 2022 (R$ 2,42 bi) está disponível, enquanto 2020, 2023 e 2024 não foram divulgados de forma isolada até a coleta destes dados.</li>
-    </ol>
-    <h3>Fontes</h3>
-    <ol>
-      <li>TELETIME — “Claro tem receita de R$ 49 bilhões no Brasil em 2024, alta de 6,9%”.</li>
-      <li>TELETIME — “Claro tem receita de R$ 45,7 bilhões no Brasil em 2023”.</li>
-      <li>TELETIME — “Claro soma receita de R$ 42,6 bilhões em 2022 e móvel ultrapassa fixo”.</li>
-      <li>Minha Operadora — “Claro Brasil registra receita de R$ 39,72 bilhões em 2021”; Telesíntese — “Claro termina 2021 com EBITDA de R$ 16,53 bilhões”.</li>
-      <li>TELETIME / TecMundo — receita 2020 de R$ 39,46 bilhões; EBITDA ≈ R$ 16,1 bilhões.</li>
-      <li>Claro S.A. — Demonstrações Financeiras 2022 e 2021 (lucro líquido consolidado).</li>
-    </ol>
-    <p>Documento informativo gerado em 14/07/2026 para fins de análise. Números sujeitos a revisão conforme demonstrações auditadas oficiais.</p>
+  <!-- NÚMERO-CHAVE -->
+  <div class="hero">
+    <span class="tag">O número-chave da oitiva</span>
+    <p class="big">R$ 377,1 <small>milhões</small></p>
+    <h2>Dívida com São Paulo — valor total consolidado</h2>
+    <p>Soma de principal, multa, juros, honorários, despesas e custas (<b>162 débitos</b>) apontada como devida pelo grupo (débitos sob Embratel). <span class="hl">99% é ISS.</span> Equivale a apenas <span class="hl">0,8% de um ano de receita</span>, <span class="hl">1,7% do EBITDA de 2024</span> e <span class="hl">~16% do lucro de 2022</span>. <span class="ok">Não há incapacidade de pagamento.</span></p>
   </div>
 
+  <!-- KPIs -->
+  <div class="kpis">
+    <div class="kpi"><p class="k-label">Valor total (base)</p><p class="k-val red">R$ 377,1 mi</p><p class="k-sub">Prefeitura lista ~R$ 372,9 mi</p></div>
+    <div class="kpi"><p class="k-label">Rubrica dominante</p><p class="k-val">ISS · 99%</p><p class="k-sub">R$ 373,4 mi · 135 débitos</p></div>
+    <div class="kpi"><p class="k-label">Total de débitos</p><p class="k-val">162</p><p class="k-sub">5 estabelecimentos (Embratel)</p></div>
+    <div class="kpi"><p class="k-label">Em dívida ativa</p><p class="k-val">99,3%</p><p class="k-sub">R$ 374,5 mi · execução fiscal</p></div>
+    <div class="kpi"><p class="k-label">Maior débito individual</p><p class="k-val amber">R$ 56,4 mi</p><p class="k-sub">ISS · incidência 2007</p></div>
+    <div class="kpi"><p class="k-label">Período das incidências</p><p class="k-val">1988–2025</p><p class="k-sub">30 execuções fiscais (TJSP)</p></div>
+  </div>
+
+  <!-- 01 · CAPACIDADE POR ANO -->
+  <section>
+    <p class="s-num">01 · Capacidade de pagamento</p>
+    <h3 class="s-title">Os resultados da Claro Brasil — por ano</h3>
+    <p class="s-desc">Receita líquida e EBITDA reportados a cada balanço (2020–2024). A linha vermelha marca a dívida total com SP (R$ 0,38 bi): ela é uma fração mínima de <em>um único</em> ano de operação.</p>
+    <div class="card">
+      <div class="legend">
+        <span><i class="sw" style="background:var(--green)"></i>Receita líquida</span>
+        <span><i class="sw" style="background:var(--blue)"></i>EBITDA</span>
+        <span><i class="sw line"></i>Dívida com SP (R$ 0,38 bi)</span>
+      </div>
+      <div class="chart-scroll"><svg id="chart" viewBox="0 0 780 400" role="img" aria-label="Receita e EBITDA da Claro Brasil de 2020 a 2024 comparados à dívida com São Paulo"></svg></div>
+    </div>
+    <div class="card">
+      <div class="tbl-scroll">
+        <table>
+          <caption>Valores anuais (R$ bilhões). Coluna final: quanto a dívida de R$ 377,1 mi representa do indicador daquele ano.</caption>
+          <thead><tr><th>Ano</th><th>Receita líq.</th><th>EBITDA</th><th>Margem</th><th>Lucro líq. (DF)</th><th>Dívida SP = % da receita</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+    <a class="src">Central de Resultados — RI Claro</a>
+    <a class="src">Arquivamentos 20-F (SEC / América Móvil)</a>
+  </section>
+
+  <!-- 02 · COMPOSIÇÃO -->
+  <section>
+    <p class="s-num">02 · Anatomia do débito</p>
+    <h3 class="s-title">Do que são feitos os R$ 377,1 milhões</h3>
+    <p class="s-desc">A maior parte do valor <strong>não é imposto principal</strong>: <span style="color:var(--amber)">62% são juros</span> acumulados. O principal efetivo é R$ 66,5 mi — argumento central para negociação de encargos.</p>
+    <div class="card">
+      <div class="brk" id="brk"></div>
+    </div>
+  </section>
+
+  <!-- 03 · POR TRIBUTO + FASE -->
+  <section>
+    <p class="s-num">03 · Motivos e estágio de cobrança</p>
+    <h3 class="s-title">Por tributo e por fase</h3>
+    <div class="cols">
+      <div class="card">
+        <div class="tbl-scroll">
+          <table>
+            <caption>Motivos dos débitos, por receita.</caption>
+            <thead><tr><th>Tributo</th><th>Qtde</th><th>Valor</th><th>%</th></tr></thead>
+            <tbody>
+              <tr><td>ISS</td><td class="mono">135</td><td class="mono g">R$ 373,38 mi</td><td class="mono">99%</td></tr>
+              <tr><td>Multa de postura municipal</td><td class="mono">26</td><td class="mono">R$ 3,75 mi</td><td class="mono">1%</td></tr>
+              <tr><td>Taxa de Elevadores</td><td class="mono">1</td><td class="mono">R$ 333,47</td><td class="mono">0%</td></tr>
+              <tr class="total"><td>Total</td><td class="mono">162</td><td class="mono">R$ 377,12 mi</td><td class="mono">100%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="tbl-scroll">
+          <table>
+            <caption>Fase de cobrança. 99,3% já está em dívida ativa.</caption>
+            <thead><tr><th>Fase</th><th>Qtde</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>Dívida ativa (execução fiscal)</td><td class="mono">143</td><td class="mono r">R$ 374,53 mi</td></tr>
+              <tr><td>Cobrança administrativa</td><td class="mono">18</td><td class="mono">R$ 2,59 mi</td></tr>
+              <tr><td>Dívida ativa (extrajudicial)</td><td class="mono">1</td><td class="mono">R$ 333,47</td></tr>
+              <tr class="total"><td>Em dívida ativa (total)</td><td class="mono">144</td><td class="mono">R$ 374,53 mi</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <a class="src">Planilha SEFAZ/PMSP — base D31284</a>
+  </section>
+
+  <!-- 04 · MAIORES PROCESSOS -->
+  <section>
+    <p class="s-num">04 · Concentração processual</p>
+    <h3 class="s-title">As maiores execuções fiscais</h3>
+    <p class="s-desc">São 30 execuções distintas no Foro das Execuções Fiscais da Comarca de SP (foro 0090 do TJSP), somando R$ 374,53 mi. Um único processo (2017) concentra <strong>metade da dívida</strong>.</p>
+    <div class="card">
+      <div class="tbl-scroll">
+        <table>
+          <caption>12 maiores por valor atualizado. CNJ reconstituído — conferir no e-SAJ/TJSP antes de citar em juízo.</caption>
+          <thead><tr><th>Nº do processo (CNJ)</th><th>Ano</th><th>Qtde</th><th>Tributo</th><th>Valor atualizado</th><th>Situação</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">1577892-39.2017.8.26.0090</td><td class="mono">2017</td><td class="mono">6</td><td>ISS</td><td class="mono r">R$ 188.654.898</td><td><span class="pill">EXECUÇÃO</span></td></tr>
+            <tr><td class="mono">1577893-24.2017.8.26.0090</td><td class="mono">2017</td><td class="mono">6</td><td>ISS</td><td class="mono">R$ 37.386.750</td><td><span class="pill">EXECUÇÃO</span></td></tr>
+            <tr><td class="mono">1613801-45.2017.8.26.0090</td><td class="mono">2017</td><td class="mono">6</td><td>ISS</td><td class="mono">R$ 33.282.636</td><td><span class="pill">EXECUÇÃO</span></td></tr>
+            <tr><td class="mono">1576516-18.2017.8.26.0090</td><td class="mono">2017</td><td class="mono">1</td><td>ISS</td><td class="mono">R$ 24.502.798</td><td><span class="pill">EXECUÇÃO</span></td></tr>
+            <tr><td class="mono">1577894-09.2017.8.26.0090</td><td class="mono">2017</td><td class="mono">6</td><td>ISS</td><td class="mono">R$ 22.904.443</td><td><span class="pill">EXECUÇÃO</span></td></tr>
+            <tr><td class="mono">1613802-30.2017.8.26.0090</td><td class="mono">2017</td><td class="mono">6</td><td>ISS</td><td class="mono">R$ 14.047.607</td><td><span class="pill">EXECUÇÃO</span></td></tr>
+            <tr><td class="mono">1577895-91.2017.8.26.0090</td><td class="mono">2017</td><td class="mono">6</td><td>ISS</td><td class="mono">R$ 13.696.959</td><td><span class="pill">EXECUÇÃO</span></td></tr>
+            <tr><td class="mono">1577896-76.2017.8.26.0090</td><td class="mono">2017</td><td class="mono">6</td><td>ISS</td><td class="mono">R$ 9.250.469</td><td><span class="pill">EXECUÇÃO</span></td></tr>
+            <tr><td class="mono">1577897-61.2017.8.26.0090</td><td class="mono">2017</td><td class="mono">6</td><td>ISS</td><td class="mono">R$ 6.080.127</td><td><span class="pill">EXECUÇÃO</span></td></tr>
+            <tr><td class="mono">1613803-15.2017.8.26.0090</td><td class="mono">2017</td><td class="mono">6</td><td>ISS</td><td class="mono">R$ 6.005.275</td><td><span class="pill">EXECUÇÃO</span></td></tr>
+            <tr><td class="mono">1577898-46.2017.8.26.0090</td><td class="mono">2017</td><td class="mono">6</td><td>ISS</td><td class="mono">R$ 3.842.448</td><td><span class="pill">EXECUÇÃO</span></td></tr>
+            <tr><td class="mono">1613804-97.2017.8.26.0090</td><td class="mono">2017</td><td class="mono">6</td><td>ISS</td><td class="mono">R$ 3.737.923</td><td><span class="pill">EXECUÇÃO</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · OBSERVAÇÕES -->
+  <section>
+    <p class="s-num">05 · Observações relevantes</p>
+    <h3 class="s-title">Pontos para a negociação</h3>
+    <div class="cols">
+      <div class="card">
+        <p class="k-label" style="font-family:var(--mono);color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-size:.66rem;margin:0 0 8px">Exigibilidade</p>
+        <p style="margin:0;color:var(--ink-2);font-size:.9rem">20 débitos com <strong style="color:var(--ink)">suspensão judicial</strong> (R$ 77,0 mi); 142 com bloqueio/suspensão na dívida ativa (R$ 374,4 mi); <strong style="color:var(--green)">0 em parcelamento</strong>. “Dever R$ X” não significa “R$ X cobrável hoje”.</p>
+      </div>
+      <div class="card">
+        <p class="k-label" style="font-family:var(--mono);color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-size:.66rem;margin:0 0 8px">Ganho rápido</p>
+        <p style="margin:0;color:var(--ink-2);font-size:.9rem">A <strong style="color:var(--ink)">Taxa de Elevadores</strong> (R$ 333) não tem discussão judicial relevante — candidato natural a cobrança/negociação imediata. O grosso (ISS) está sob execução no foro 0090.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · IDENTIFICAÇÃO -->
+  <section>
+    <p class="s-num">06 · Identificação do devedor</p>
+    <h3 class="s-title">Por que os débitos aparecem sob “Embratel”</h3>
+    <div class="card">
+      <p style="margin:0 0 10px;color:var(--ink-2);font-size:.92rem">Não há débitos lançados sob o CNPJ da <strong style="color:var(--ink)">Claro S.A. (40.432.544)</strong> na base D31284. Os débitos do grupo estão sob a <strong style="color:var(--ink)">Empresa Brasileira de Telecomunicações — Embratel</strong> (raiz de CNPJ 33.530.486, 5 estabelecimentos), <strong style="color:var(--ink)">incorporada pela Claro S.A. em 2020</strong>, que sucedeu a empresa em direitos e obrigações.</p>
+      <p style="margin:0;color:var(--ink-2);font-size:.92rem">A Claro é controlada da <strong style="color:var(--ink)">América Móvil</strong> (capital aberto, NYSE: AMX), que <strong style="color:var(--amber)">não divulga isoladamente o lucro da operação brasileira</strong> — por isso o lucro líquido só é público onde consta das Demonstrações Financeiras da controlada (2021 e 2022). O diretor de RI da Claro foi convidado à oitiva (REQ 02/2026).</p>
+    </div>
+  </section>
+
+  <footer>
+    <h4>Fontes</h4>
+    <ol>
+      <li>Planilha SEFAZ/PMSP — base D31284 (extração 2026): valor total, composição, tributos, fase de cobrança e execuções fiscais.</li>
+      <li>Demonstrações Financeiras da Claro S.A. (controlada) — lucro líquido consolidado de 2021 (R$ 3,46 bi) e 2022 (R$ 2,42 bi).</li>
+      <li>Central de Resultados / RI Claro e arquivamentos 20-F na SEC (América Móvil) — receita líquida e EBITDA 2020–2024.</li>
+      <li>Registros públicos do CNPJ (Receita Federal) e relações com investidores — dados societários (Embratel / Claro / América Móvil).</li>
+    </ol>
+    <p class="warn">Uso interno — dados sob sigilo fiscal. Números CNJ reconstituídos do campo SAJ; confira no e-SAJ/TJSP antes de citar em juízo. Valores atualizados na data da extração; “dever R$ X” não equivale a “R$ X exigível hoje”.</p>
+    <p>CPI dos Grandes Devedores da Dívida Ativa — CMSP · Documento de trabalho gerado em 14/07/2026.</p>
+  </footer>
+
 </div>
-<div id="tip"></div>
 
 <script>
 const YEARS   = [2020, 2021, 2022, 2023, 2024];
 const RECEITA = [39.46, 39.72, 42.66, 45.76, 48.90];
 const EBITDA  = [16.05, 16.53, 17.99, 19.67, 21.70];
-const MARGEM  = [40.7, 41.6, 42.2, 43.0, 44.4];          // % (calculada)
-const LUCRO   = [null, 3.464, 2.421, null, null];         // R$ bi, DFs consolidadas
+const MARGEM  = [40.7, 41.6, 42.2, 43.0, 44.4];
+const LUCRO   = [null, 3.464, 2.421, null, null];
+const DIVIDA  = 0.3771; // R$ bi
 
-const fmt = (n, d=1) => n.toLocaleString('pt-BR',{minimumFractionDigits:d, maximumFractionDigits:d});
+const fmt = (n,d=1) => n.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
 
-/* ---------- Gráfico de barras agrupadas ---------- */
+/* ---------- Gráfico ---------- */
 (function(){
   const svg = document.getElementById('chart');
-  const NS = 'http://www.w3.org/2000/svg';
-  const W = 760, H = 400;
-  const m = {t:16, r:16, b:46, l:44};
-  const iw = W - m.l - m.r, ih = H - m.t - m.b;
-  const yMax = 55;
-  const y = v => m.t + ih - (v / yMax) * ih;
+  const NS='http://www.w3.org/2000/svg';
+  const W=780,H=400, m={t:20,r:16,b:46,l:46};
+  const iw=W-m.l-m.r, ih=H-m.t-m.b, yMax=55;
+  const y=v=>m.t+ih-(v/yMax)*ih;
+  const mk=(t,a,x)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(x!=null)e.textContent=x;svg.appendChild(e);return e;};
 
-  const mk = (tag, attrs, txt) => {
-    const el = document.createElementNS(NS, tag);
-    for (const k in attrs) el.setAttribute(k, attrs[k]);
-    if (txt != null) el.textContent = txt;
-    svg.appendChild(el);
-    return el;
-  };
-
-  // gridlines + y ticks
-  for (let v = 0; v <= yMax; v += 10){
-    mk('line', {x1:m.l, x2:m.l+iw, y1:y(v), y2:y(v), stroke:'var(--grid)', 'stroke-width':1});
-    mk('text', {x:m.l-8, y:y(v)+4, 'text-anchor':'end', class:'axislabel'}, v);
+  for(let v=0;v<=yMax;v+=10){
+    mk('line',{x1:m.l,x2:m.l+iw,y1:y(v),y2:y(v),stroke:'var(--line)','stroke-width':1});
+    mk('text',{x:m.l-8,y:y(v)+4,'text-anchor':'end',class:'g-axis'},v);
   }
-  // baseline
-  mk('line', {x1:m.l, x2:m.l+iw, y1:y(0), y2:y(0), stroke:'var(--axis)', 'stroke-width':1.5});
-
-  const groups = YEARS.length;
-  const gw = iw / groups;
-  const bw = 30, gap = 8;
-  const series = [
-    {data:RECEITA, color:'var(--receita)', name:'Receita líquida'},
-    {data:EBITDA,  color:'var(--ebitda)',  name:'EBITDA'}
-  ];
-  const tip = document.getElementById('tip');
-
-  YEARS.forEach((yr, i) => {
-    const cx = m.l + gw*i + gw/2;
-    const startX = cx - (bw*2 + gap)/2;
-    series.forEach((s, j) => {
-      const v = s.data[i];
-      const bx = startX + j*(bw+gap);
-      const by = y(v), bh = y(0) - by;
-      const rect = mk('rect', {
-        x:bx, y:by, width:bw, height:bh, rx:4, fill:s.color, class:'bar'
-      });
-      // rótulo direto no topo
-      mk('text', {x:bx+bw/2, y:by-6, 'text-anchor':'middle', class:'blabel'}, fmt(v));
-      // hover
-      const show = (e)=>{
-        tip.innerHTML = `<b>${yr}</b> · ${s.name}<br><b>R$ ${fmt(v)} bi</b>`+
-          (s.name==='EBITDA' ? `<br>Margem <b>${fmt(MARGEM[i])}%</b>` : '');
-        tip.style.opacity = 1;
-        tip.style.left = (e.clientX+14)+'px';
-        tip.style.top  = (e.clientY-10)+'px';
-      };
-      rect.addEventListener('mousemove', show);
-      rect.addEventListener('mouseleave', ()=> tip.style.opacity = 0);
+  const gw=iw/YEARS.length, bw=30, gap=8;
+  const series=[{d:RECEITA,c:'var(--green)',cl:''},{d:EBITDA,c:'var(--blue)',cl:' b'}];
+  YEARS.forEach((yr,i)=>{
+    const cx=m.l+gw*i+gw/2, sx=cx-(bw*2+gap)/2;
+    series.forEach((s,j)=>{
+      const v=s.d[i], bx=sx+j*(bw+gap), by=y(v);
+      mk('rect',{x:bx,y:by,width:bw,height:y(0)-by,rx:4,fill:s.c,class:'bar'});
+      mk('text',{x:bx+bw/2,y:by-6,'text-anchor':'middle',class:'g-label'+s.cl},fmt(v));
     });
-    // rótulo do ano
-    mk('text', {x:cx, y:H-18, 'text-anchor':'middle', class:'yearlabel'}, yr);
+    mk('text',{x:cx,y:H-18,'text-anchor':'middle',class:'g-year'},yr);
   });
-
-  // título eixo Y
-  mk('text', {x:m.l-30, y:m.t-2, 'text-anchor':'start', class:'axislabel'}, 'R$ bi');
+  // baseline
+  mk('line',{x1:m.l,x2:m.l+iw,y1:y(0),y2:y(0),stroke:'var(--line-2)','stroke-width':1.5});
+  // linha da dívida
+  mk('line',{x1:m.l,x2:m.l+iw,y1:y(DIVIDA),y2:y(DIVIDA),stroke:'var(--red)','stroke-width':2,'stroke-dasharray':'6 4'});
+  mk('text',{x:m.l+iw,y:y(DIVIDA)-6,'text-anchor':'end',class:'g-debt'},'DÍVIDA SP · R$ 0,38 bi');
+  mk('text',{x:m.l-34,y:m.t-6,'text-anchor':'start',class:'g-axis'},'R$ bi');
 })();
 
-/* ---------- Tabela ---------- */
+/* ---------- Tabela por ano ---------- */
 (function(){
-  const tb = document.getElementById('tbody');
+  const tb=document.getElementById('tbody');
   YEARS.forEach((yr,i)=>{
-    const lucro = LUCRO[i]==null
-      ? '<span class="na">não divulgado</span>'
-      : 'R$ '+fmt(LUCRO[i],2)+' bi';
+    const luc = LUCRO[i]==null ? '<td class="mono na">n/d</td>' : '<td class="mono g">R$ '+fmt(LUCRO[i],2)+' bi</td>';
+    const pct = (DIVIDA/RECEITA[i]*100);
     tb.insertAdjacentHTML('beforeend',
-      `<tr>
-        <td>${yr}</td>
-        <td>R$ ${fmt(RECEITA[i])} bi</td>
-        <td>R$ ${fmt(EBITDA[i])} bi</td>
-        <td>${fmt(MARGEM[i])}%</td>
-        <td>${lucro}</td>
-      </tr>`);
+      `<tr><td>${yr}</td><td class="mono">R$ ${fmt(RECEITA[i])} bi</td><td class="mono">R$ ${fmt(EBITDA[i])} bi</td><td class="mono">${fmt(MARGEM[i])}%</td>${luc}<td class="mono r">${fmt(pct,2)}%</td></tr>`);
+  });
+})();
+
+/* ---------- Composição ---------- */
+(function(){
+  const TOTAL=377121609.31;
+  const items=[
+    {n:'Juros',v:234000063.86,c:'var(--amber)'},
+    {n:'Valor principal',v:66502663.72,c:'var(--green)'},
+    {n:'Multa',v:41448342.54,c:'var(--red)'},
+    {n:'Honorários',v:34002601.64,c:'var(--blue)'},
+    {n:'Custas judiciais',v:1167887.85,c:'var(--ink-2)'},
+    {n:'Despesas',v:49.70,c:'var(--muted)'}
+  ];
+  const max=items[0].v, brk=document.getElementById('brk');
+  const mi=v=>'R$ '+ (v/1e6).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) +' mi';
+  items.forEach(it=>{
+    const pct=(it.v/TOTAL*100);
+    brk.insertAdjacentHTML('beforeend',
+      `<div class="brk-row">
+         <span class="n">${it.n}</span>
+         <span class="brk-track"><span class="brk-fill" style="width:${Math.max(it.v/max*100,0.6)}%;background:${it.c}"></span></span>
+         <span class="v"><b style="color:${it.c}">${pct<0.1?'<0,1':fmt(pct,1)}%</b> · ${mi(it.v)}</span>
+       </div>`);
   });
 })();
 </script>
