@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Devedômetro — Claro Brasil | Resultado 2025</title>
+  <style>
+    :root {
+      --claro-red: #DA291C;
+      --claro-red-dark: #A81F16;
+      --ink: #16181d;
+      --muted: #5b6472;
+      --line: #e6e8ec;
+      --bg: #f5f6f8;
+      --card: #ffffff;
+      --pos: #12855a;
+      --pos-bg: #e6f4ec;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 24px 20px 64px; }
+
+    /* Header */
+    .topbar {
+      display: flex; align-items: center; gap: 14px;
+      padding: 18px 20px; border-radius: 14px;
+      background: linear-gradient(120deg, var(--claro-red), var(--claro-red-dark));
+      color: #fff; box-shadow: 0 6px 20px rgba(218,41,28,.25);
+    }
+    .logo {
+      width: 54px; height: 54px; border-radius: 50%;
+      background: #fff; color: var(--claro-red);
+      display: grid; place-items: center;
+      font-weight: 800; font-size: 20px; letter-spacing: .5px;
+      flex: 0 0 auto;
+    }
+    .topbar h1 { font-size: 22px; font-weight: 800; letter-spacing: -.3px; }
+    .topbar .sub { font-size: 13px; opacity: .9; font-weight: 500; }
+    .badge {
+      margin-left: auto; background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.35);
+      padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .kicker {
+      display: inline-block; margin: 28px 0 6px;
+      font-size: 12px; font-weight: 800; letter-spacing: 1.2px;
+      color: var(--claro-red); text-transform: uppercase;
+    }
+    h2 { font-size: 18px; font-weight: 800; letter-spacing: -.2px; margin-bottom: 14px; }
+
+    /* Cards grid */
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 14px; padding: 18px 18px 16px;
+      box-shadow: 0 1px 2px rgba(16,24,40,.04);
+    }
+    .card .label { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .4px; }
+    .card .value { font-size: 30px; font-weight: 800; letter-spacing: -1px; margin: 6px 0 4px; }
+    .card .value small { font-size: 15px; font-weight: 700; color: var(--muted); }
+    .delta {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 12px; font-weight: 800;
+      color: var(--pos); background: var(--pos-bg);
+      padding: 3px 8px; border-radius: 999px;
+    }
+    .card .note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    .highlight { border-color: var(--claro-red); box-shadow: 0 4px 14px rgba(218,41,28,.12); }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; background: var(--card);
+      border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+    th, td { text-align: left; padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--line); }
+    thead th { background: #fafbfc; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
+    td.pos { color: var(--pos); font-weight: 700; }
+
+    .callout {
+      margin-top: 16px; background: #fff8f7;
+      border: 1px solid #f3d3cf; border-left: 4px solid var(--claro-red);
+      padding: 14px 16px; border-radius: 10px; font-size: 13px; color: #6a3833;
+    }
+    .callout strong { color: var(--claro-red-dark); }
+
+    footer { margin-top: 34px; font-size: 12px; color: var(--muted); line-height: 1.7; }
+    footer a { color: var(--claro-red); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .navlink { display:inline-block; margin-top: 22px; font-size: 13px; font-weight: 700; color: var(--claro-red); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <div class="logo">C</div>
+      <div>
+        <h1>Claro Brasil</h1>
+        <div class="sub">Devedômetro · Resultado financeiro — exercício de 2025</div>
+      </div>
+      <span class="badge">DADOS DE RI</span>
+    </div>
+
+    <span class="kicker">Indicadores-chave · 2025</span>
+    <h2>Quanto a Claro lucrou</h2>
+    <div class="grid">
+      <div class="card highlight">
+        <div class="label">Lucro operacional (EBIT)</div>
+        <div class="value">R$ 10,7 <small>bi</small></div>
+        <span class="delta">▲ 16%</span>
+        <div class="note">Ante R$ 9,2 bi em 2024</div>
+      </div>
+      <div class="card">
+        <div class="label">EBITDA</div>
+        <div class="value">R$ 23,4 <small>bi</small></div>
+        <span class="delta">▲ 7,5%</span>
+        <div class="note">Margem EBITDA de 45,1%</div>
+      </div>
+      <div class="card">
+        <div class="label">Receita líquida</div>
+        <div class="value">R$ 51,8 <small>bi</small></div>
+        <span class="delta">▲ 5,9%</span>
+        <div class="note">Puxada pelo segmento móvel</div>
+      </div>
+    </div>
+
+    <span class="kicker">Abertura por segmento · 2025</span>
+    <h2>De onde vem a receita</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Segmento</th>
+          <th class="num">Receita 2025</th>
+          <th class="num">Variação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Móvel</td>
+          <td class="num">R$ 28,2 bi</td>
+          <td class="num pos">+8,4%</td>
+        </tr>
+        <tr>
+          <td>Fixo e outros</td>
+          <td class="num">R$ 20,7 bi</td>
+          <td class="num pos">+1,8%</td>
+        </tr>
+        <tr>
+          <td><strong>Receita líquida total</strong></td>
+          <td class="num">R$ 51,8 bi</td>
+          <td class="num pos">+5,9%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <span class="kicker">4º trimestre · 2025</span>
+    <h2>Fechamento do 4T25</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="label">Receita líquida 4T25</div>
+        <div class="value">R$ 13,4 <small>bi</small></div>
+        <span class="delta">▲ 6,1%</span>
+        <div class="note">Ante o 4T24</div>
+      </div>
+      <div class="card">
+        <div class="label">EBITDA 4T25</div>
+        <div class="value">R$ 6,0 <small>bi</small></div>
+        <span class="delta">▲ 6,6%</span>
+        <div class="note">Margem de 45,0%</div>
+      </div>
+      <div class="card">
+        <div class="label">Base móvel</div>
+        <div class="value">89,5 <small>mi</small></div>
+        <div class="note">58,4 mi de linhas pós-pagas<br/>(+4,5 mi em 12 meses)</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Nota metodológica.</strong> Diferentemente da TIM Brasil — que é listada em bolsa e divulga
+      <em>lucro líquido</em> próprio —, a Claro Brasil é subsidiária da <strong>América Móvil</strong> e
+      reporta seus resultados em termos de <strong>receita, EBITDA e EBIT (lucro operacional)</strong>. O lucro
+      líquido consolidado só é publicado no nível da holding (América Móvil, no México). Por isso, para efeito de
+      comparação de rentabilidade neste painel, adota-se o <strong>EBIT</strong> como métrica de "lucro" da Claro,
+      com o EBITDA e a margem como indicadores complementares.
+    </div>
+
+    <a class="navlink" href="tim.html">← Comparar com a TIM</a>
+
+    <footer>
+      <strong>Fontes:</strong> resultados/RI Claro Brasil (América Móvil), exercício de 2025.<br/>
+      TELETIME — “Claro soma receita de R$ 51,8 bilhões em 2025, alta de 5,9%”;
+      Mobiletime — “Claro fecha 2025 com R$ 52 bi de receita”;
+      Telesíntese — “Claro cresce 6,1% no quarto trimestre de 2025”.<br/>
+      Valores arredondados. Painel informativo — não constitui recomendação de investimento.
+    </footer>
+
+  </div>
+</body>
+</html>
