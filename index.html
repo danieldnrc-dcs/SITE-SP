@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claro S.A. Brasil — Resultados 2020–2024</title>
+<style>
+  :root{
+    color-scheme: light;
+    --plane:#f9f9f7; --surface:#fcfcfb;
+    --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+    --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,0.10);
+    --receita:#2a78d6;  /* blue  */
+    --ebitda:#1baf7a;   /* aqua  */
+    --lucro:#eda100;    /* yellow */
+    --good:#006300;
+    --shadow:0 1px 2px rgba(11,11,11,.05),0 8px 24px rgba(11,11,11,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:where(:not([data-theme="light"])){
+      color-scheme: dark;
+      --plane:#0d0d0d; --surface:#1a1a19;
+      --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+      --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,0.10);
+      --receita:#3987e5; --ebitda:#199e70; --lucro:#c98500; --good:#0ca30c;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --plane:#0d0d0d; --surface:#1a1a19;
+    --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,0.10);
+    --receita:#3987e5; --ebitda:#199e70; --lucro:#c98500; --good:#0ca30c;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--plane); color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:980px; margin:0 auto; padding:40px 20px 64px}
+  header.page{margin-bottom:28px}
+  .eyebrow{font-size:.8rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--receita); margin:0 0 6px}
+  h1{font-size:clamp(1.6rem,4vw,2.3rem); margin:0 0 8px; letter-spacing:-.02em}
+  .sub{color:var(--ink-2); margin:0; max-width:66ch}
+
+  /* KPI tiles */
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; margin:28px 0}
+  .tile{background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:16px 18px; box-shadow:var(--shadow)}
+  .tile .label{font-size:.78rem; color:var(--ink-2); margin:0 0 6px; font-weight:600}
+  .tile .val{font-size:1.85rem; font-weight:700; letter-spacing:-.02em; margin:0; font-variant-numeric:tabular-nums}
+  .tile .delta{font-size:.82rem; margin:4px 0 0; color:var(--good); font-weight:600}
+  .tile .delta.neutral{color:var(--muted)}
+
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:22px 22px 14px; box-shadow:var(--shadow); margin:22px 0}
+  .card h2{font-size:1.05rem; margin:0 0 2px; letter-spacing:-.01em}
+  .card .note{font-size:.82rem; color:var(--muted); margin:0 0 14px}
+
+  /* legend */
+  .legend{display:flex; flex-wrap:wrap; gap:16px; margin:0 0 6px; font-size:.85rem; color:var(--ink-2)}
+  .legend span{display:inline-flex; align-items:center; gap:7px}
+  .swatch{width:11px; height:11px; border-radius:3px; display:inline-block}
+
+  .chart-scroll{overflow-x:auto}
+  svg{display:block; width:100%; height:auto; min-width:520px}
+  .bar{transition:opacity .12s}
+  .bar:hover{opacity:.82; cursor:default}
+  .blabel{font-size:11px; font-weight:600; fill:var(--ink); font-variant-numeric:tabular-nums}
+  .axislabel{font-size:11px; fill:var(--muted); font-variant-numeric:tabular-nums}
+  .yearlabel{font-size:12.5px; font-weight:600; fill:var(--ink-2)}
+
+  /* table */
+  table{width:100%; border-collapse:collapse; font-size:.9rem; font-variant-numeric:tabular-nums}
+  caption{text-align:left; font-size:.82rem; color:var(--muted); margin-bottom:10px}
+  th,td{padding:9px 10px; text-align:right; border-bottom:1px solid var(--border)}
+  th:first-child,td:first-child{text-align:left; font-variant-numeric:normal}
+  thead th{font-size:.78rem; color:var(--ink-2); border-bottom:1.5px solid var(--axis)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:color-mix(in srgb, var(--receita) 7%, transparent)}
+  .na{color:var(--muted)}
+
+  .foot{font-size:.8rem; color:var(--muted); margin-top:26px; line-height:1.7}
+  .foot a{color:var(--receita)}
+  .foot h3{font-size:.82rem; color:var(--ink-2); margin:0 0 6px; text-transform:uppercase; letter-spacing:.06em}
+  .foot ol{margin:0 0 14px; padding-left:1.2em}
+
+  /* tooltip */
+  #tip{position:fixed; pointer-events:none; background:var(--ink); color:var(--plane);
+       padding:7px 10px; border-radius:8px; font-size:.78rem; line-height:1.35;
+       opacity:0; transition:opacity .1s; z-index:10; white-space:nowrap; box-shadow:var(--shadow)}
+  #tip b{font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page">
+    <p class="eyebrow">Telecom · Brasil</p>
+    <h1>Claro S.A. — Resultados Financeiros 2020–2024</h1>
+    <p class="sub">Panorama dos números divulgados pela Claro S.A. no Brasil ao longo dos últimos cinco exercícios: receita líquida, EBITDA, margem operacional e o lucro líquido reportado nas Demonstrações Financeiras (DFs) oficiais.</p>
+  </header>
+
+  <!-- KPIs — exercício mais recente -->
+  <section class="kpis" aria-label="Destaques de 2024">
+    <div class="tile">
+      <p class="label">Receita líquida 2024</p>
+      <p class="val">R$ 48,9 bi</p>
+      <p class="delta">▲ 6,9% vs. 2023</p>
+    </div>
+    <div class="tile">
+      <p class="label">EBITDA 2024</p>
+      <p class="val">R$ 21,7 bi</p>
+      <p class="delta">▲ 10,6% vs. 2023</p>
+    </div>
+    <div class="tile">
+      <p class="label">Margem EBITDA 2024</p>
+      <p class="val">44,5%</p>
+      <p class="delta">▲ 1,5 p.p.</p>
+    </div>
+    <div class="tile">
+      <p class="label">Receita acumulada 5 anos</p>
+      <p class="val">R$ 216,5 bi</p>
+      <p class="delta neutral">2020 – 2024</p>
+    </div>
+  </section>
+
+  <!-- Gráfico principal -->
+  <section class="card">
+    <h2>Receita líquida × EBITDA por ano</h2>
+    <p class="note">Valores em bilhões de reais (R$ bi). Escala única.</p>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--receita)"></i>Receita líquida</span>
+      <span><i class="swatch" style="background:var(--ebitda)"></i>EBITDA</span>
+    </div>
+    <div class="chart-scroll">
+      <svg id="chart" viewBox="0 0 760 400" role="img"
+           aria-label="Gráfico de barras da receita líquida e do EBITDA da Claro S.A. de 2020 a 2024"></svg>
+    </div>
+  </section>
+
+  <!-- Tabela -->
+  <section class="card">
+    <h2>Tabela consolidada</h2>
+    <div class="chart-scroll">
+      <table>
+        <caption>Claro S.A. (Brasil) — valores anuais. Lucro líquido conforme Demonstrações Financeiras consolidadas.</caption>
+        <thead>
+          <tr>
+            <th>Ano</th>
+            <th>Receita líquida</th>
+            <th>EBITDA</th>
+            <th>Margem EBITDA</th>
+            <th>Lucro líquido (consolidado)</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="foot">
+    <h3>Notas metodológicas</h3>
+    <ol>
+      <li><b>Receita e EBITDA</b> são os indicadores que a Claro divulga publicamente a cada balanço; os valores acima refletem os totais anuais (Brasil) reportados pela empresa e pela imprensa especializada.</li>
+      <li><b>Margem EBITDA</b> calculada como EBITDA ÷ receita líquida (2024 reportada oficialmente em 44,5%). EBITDA de 2020 (≈ R$ 16,05 bi) derivado do crescimento de 3% informado para 2021.</li>
+      <li><b>Lucro líquido:</b> ao contrário de Vivo e TIM, a Claro não destaca o lucro líquido em seus releases de imprensa — o resultado consolidado que se torna público consta apenas das Demonstrações Financeiras (DFs) arquivadas. Por isso, o lucro líquido de 2021 (R$ 3,46 bi) e 2022 (R$ 2,42 bi) está disponível, enquanto 2020, 2023 e 2024 não foram divulgados de forma isolada até a coleta destes dados.</li>
+    </ol>
+    <h3>Fontes</h3>
+    <ol>
+      <li>TELETIME — “Claro tem receita de R$ 49 bilhões no Brasil em 2024, alta de 6,9%”.</li>
+      <li>TELETIME — “Claro tem receita de R$ 45,7 bilhões no Brasil em 2023”.</li>
+      <li>TELETIME — “Claro soma receita de R$ 42,6 bilhões em 2022 e móvel ultrapassa fixo”.</li>
+      <li>Minha Operadora — “Claro Brasil registra receita de R$ 39,72 bilhões em 2021”; Telesíntese — “Claro termina 2021 com EBITDA de R$ 16,53 bilhões”.</li>
+      <li>TELETIME / TecMundo — receita 2020 de R$ 39,46 bilhões; EBITDA ≈ R$ 16,1 bilhões.</li>
+      <li>Claro S.A. — Demonstrações Financeiras 2022 e 2021 (lucro líquido consolidado).</li>
+    </ol>
+    <p>Documento informativo gerado em 14/07/2026 para fins de análise. Números sujeitos a revisão conforme demonstrações auditadas oficiais.</p>
+  </div>
+
+</div>
+<div id="tip"></div>
+
+<script>
+const YEARS   = [2020, 2021, 2022, 2023, 2024];
+const RECEITA = [39.46, 39.72, 42.66, 45.76, 48.90];
+const EBITDA  = [16.05, 16.53, 17.99, 19.67, 21.70];
+const MARGEM  = [40.7, 41.6, 42.2, 43.0, 44.4];          // % (calculada)
+const LUCRO   = [null, 3.464, 2.421, null, null];         // R$ bi, DFs consolidadas
+
+const fmt = (n, d=1) => n.toLocaleString('pt-BR',{minimumFractionDigits:d, maximumFractionDigits:d});
+
+/* ---------- Gráfico de barras agrupadas ---------- */
+(function(){
+  const svg = document.getElementById('chart');
+  const NS = 'http://www.w3.org/2000/svg';
+  const W = 760, H = 400;
+  const m = {t:16, r:16, b:46, l:44};
+  const iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const yMax = 55;
+  const y = v => m.t + ih - (v / yMax) * ih;
+
+  const mk = (tag, attrs, txt) => {
+    const el = document.createElementNS(NS, tag);
+    for (const k in attrs) el.setAttribute(k, attrs[k]);
+    if (txt != null) el.textContent = txt;
+    svg.appendChild(el);
+    return el;
+  };
+
+  // gridlines + y ticks
+  for (let v = 0; v <= yMax; v += 10){
+    mk('line', {x1:m.l, x2:m.l+iw, y1:y(v), y2:y(v), stroke:'var(--grid)', 'stroke-width':1});
+    mk('text', {x:m.l-8, y:y(v)+4, 'text-anchor':'end', class:'axislabel'}, v);
+  }
+  // baseline
+  mk('line', {x1:m.l, x2:m.l+iw, y1:y(0), y2:y(0), stroke:'var(--axis)', 'stroke-width':1.5});
+
+  const groups = YEARS.length;
+  const gw = iw / groups;
+  const bw = 30, gap = 8;
+  const series = [
+    {data:RECEITA, color:'var(--receita)', name:'Receita líquida'},
+    {data:EBITDA,  color:'var(--ebitda)',  name:'EBITDA'}
+  ];
+  const tip = document.getElementById('tip');
+
+  YEARS.forEach((yr, i) => {
+    const cx = m.l + gw*i + gw/2;
+    const startX = cx - (bw*2 + gap)/2;
+    series.forEach((s, j) => {
+      const v = s.data[i];
+      const bx = startX + j*(bw+gap);
+      const by = y(v), bh = y(0) - by;
+      const rect = mk('rect', {
+        x:bx, y:by, width:bw, height:bh, rx:4, fill:s.color, class:'bar'
+      });
+      // rótulo direto no topo
+      mk('text', {x:bx+bw/2, y:by-6, 'text-anchor':'middle', class:'blabel'}, fmt(v));
+      // hover
+      const show = (e)=>{
+        tip.innerHTML = `<b>${yr}</b> · ${s.name}<br><b>R$ ${fmt(v)} bi</b>`+
+          (s.name==='EBITDA' ? `<br>Margem <b>${fmt(MARGEM[i])}%</b>` : '');
+        tip.style.opacity = 1;
+        tip.style.left = (e.clientX+14)+'px';
+        tip.style.top  = (e.clientY-10)+'px';
+      };
+      rect.addEventListener('mousemove', show);
+      rect.addEventListener('mouseleave', ()=> tip.style.opacity = 0);
+    });
+    // rótulo do ano
+    mk('text', {x:cx, y:H-18, 'text-anchor':'middle', class:'yearlabel'}, yr);
+  });
+
+  // título eixo Y
+  mk('text', {x:m.l-30, y:m.t-2, 'text-anchor':'start', class:'axislabel'}, 'R$ bi');
+})();
+
+/* ---------- Tabela ---------- */
+(function(){
+  const tb = document.getElementById('tbody');
+  YEARS.forEach((yr,i)=>{
+    const lucro = LUCRO[i]==null
+      ? '<span class="na">não divulgado</span>'
+      : 'R$ '+fmt(LUCRO[i],2)+' bi';
+    tb.insertAdjacentHTML('beforeend',
+      `<tr>
+        <td>${yr}</td>
+        <td>R$ ${fmt(RECEITA[i])} bi</td>
+        <td>R$ ${fmt(EBITDA[i])} bi</td>
+        <td>${fmt(MARGEM[i])}%</td>
+        <td>${lucro}</td>
+      </tr>`);
+  });
+})();
+</script>
+</body>
+</html>
