@@ -17,6 +17,7 @@ Sistema visual extraído do painel `index.html` (CPI dos Grandes Devedores da D�
 | `tokens.json` | Os mesmos tokens no formato W3C Design Tokens | Style Dictionary, Figma Tokens, geração de temas |
 | `tailwind.preset.js` | Preset Tailwind v3 que aponta para as variáveis CSS | Projetos com Tailwind |
 | `example.html` | Página de referência com todos os componentes renderizados | Conferência visual. Abra no navegador |
+| `screenshots/` | Capturas do `example.html` em 1000px e 390px | Referência visual para agentes que leem imagens |
 | `logos/` | Marca e wordmarks em SVG e PNG | Ver seção 11 |
 
 ### Como usar
