@@ -76,7 +76,7 @@
   .brk-row{display:grid; grid-template-columns:150px 1fr auto; gap:12px; align-items:center; font-size:.86rem}
   .brk-row .n{color:var(--ink-2)}
   .brk-track{height:14px; background:var(--panel-2); border-radius:4px; overflow:hidden; border:1px solid var(--line)}
-  .brk-fill{height:100%; border-radius:3px}
+  .brk-fill{display:block; height:100%; border-radius:3px}
   .brk-row .v{font-family:var(--mono); color:var(--ink); font-size:.82rem; white-space:nowrap}
   .brk-row .v b{color:var(--green)}
 
@@ -99,8 +99,8 @@
   .src::before{content:"▤"; opacity:.7}
 
   /* two col */
-  .cols{display:grid; grid-template-columns:1fr 1fr; gap:14px}
-  @media(max-width:720px){ .cols{grid-template-columns:1fr} .brk-row{grid-template-columns:110px 1fr; } .brk-row .v{grid-column:1/-1; text-align:right} }
+  .cols{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px}
+  @media(max-width:720px){ .cols{grid-template-columns:minmax(0,1fr)} .brk-row{grid-template-columns:110px 1fr; } .brk-row .v{grid-column:1/-1; text-align:right} }
 
   footer{margin-top:44px; padding-top:20px; border-top:1px solid var(--line); font-size:.8rem; color:var(--muted); line-height:1.7}
   footer .warn{color:var(--amber)}
