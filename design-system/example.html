@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel CPI — Referência de componentes</title>
+<link rel="icon" href="logos/mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="logos/apple-touch-icon-180.png">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+  /* estilos só desta página de referência (não fazem parte do sistema) */
+  .swatches{display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:var(--space-3)}
+  .swatch{border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; background:var(--panel)}
+  .swatch i{display:block; height:56px; border-bottom:1px solid var(--line)}
+  .swatch p{margin:0; padding:8px 10px; font-family:var(--mono); font-size:.72rem; color:var(--ink-2)}
+  .swatch p b{display:block; color:var(--ink); font-size:.78rem}
+  .type-row{display:grid; grid-template-columns:160px 1fr; gap:12px; align-items:baseline; padding:10px 0; border-bottom:1px solid var(--line)}
+  .type-row:last-child{border-bottom:0}
+  .type-row code{font-family:var(--mono); font-size:.72rem; color:var(--muted)}
+  .brand{display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center}
+  .brand .light{background:#fff; border-radius:var(--r-md); padding:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- CABEÇALHO DE PÁGINA -->
+  <header>
+    <p class="eyebrow">Design System · Painel CPI · Referência</p>
+    <h1>Componentes do painel<br>CPI dos Grandes Devedores</h1>
+    <p class="lead">Página de referência com todos os componentes do sistema, usando apenas <span class="t-mono">tokens.css</span>, <span class="t-mono">components.css</span> e <span class="t-mono">charts.js</span>. Os dados são os do painel Claro/Embratel.</p>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="tag">O número-chave da oitiva</span>
+    <p class="big">R$ 377,1 <small>milhões</small></p>
+    <h2>Dívida com São Paulo — valor total consolidado</h2>
+    <p>Soma de principal, multa, juros, honorários, despesas e custas (<b>162 débitos</b>). <span class="hl">99% é ISS.</span> Equivale a <span class="hl">0,8% de um ano de receita</span>. <span class="ok">Não há incapacidade de pagamento.</span></p>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpis">
+    <div class="kpi"><p class="k-label">Valor total (base)</p><p class="k-val red">R$ 377,1 mi</p><p class="k-sub">Prefeitura lista ~R$ 372,9 mi</p></div>
+    <div class="kpi"><p class="k-label">Rubrica dominante</p><p class="k-val">ISS · 99%</p><p class="k-sub">R$ 373,4 mi · 135 débitos</p></div>
+    <div class="kpi"><p class="k-label">Maior débito</p><p class="k-val amber">R$ 56,4 mi</p><p class="k-sub">ISS · incidência 2007</p></div>
+    <div class="kpi"><p class="k-label">EBITDA 2024</p><p class="k-val blue">R$ 21,7 bi</p><p class="k-sub">Margem 44,4%</p></div>
+  </div>
+
+  <!-- 01 · GRÁFICO + TABELA -->
+  <section>
+    <p class="s-num">01 · Gráfico de barras + tabela</p>
+    <h3 class="s-title">Capacidade de pagamento por ano</h3>
+    <p class="s-desc">Barras agrupadas (verde = série 1, azul = série 2) e linha tracejada vermelha de referência para a dívida.</p>
+    <div class="card">
+      <div class="legend">
+        <span><i class="sw" style="background:var(--green)"></i>Receita líquida</span>
+        <span><i class="sw" style="background:var(--blue)"></i>EBITDA</span>
+        <span><i class="sw line"></i>Dívida com SP (R$ 0,38 bi)</span>
+      </div>
+      <div class="chart-scroll"><svg id="chart" viewBox="0 0 780 400" role="img" aria-label="Receita e EBITDA de 2020 a 2024 comparados à dívida com São Paulo"></svg></div>
+    </div>
+    <div class="card">
+      <div class="tbl-scroll">
+        <table>
+          <caption>Valores anuais (R$ bilhões).</caption>
+          <thead><tr><th>Ano</th><th>Receita líq.</th><th>EBITDA</th><th>Lucro líq.</th><th>Dívida SP = % da receita</th></tr></thead>
+          <tbody>
+            <tr><td>2021</td><td class="mono">R$ 39,7 bi</td><td class="mono">R$ 16,5 bi</td><td class="mono g">R$ 3,46 bi</td><td class="mono r">0,95%</td></tr>
+            <tr><td>2023</td><td class="mono">R$ 45,8 bi</td><td class="mono">R$ 19,7 bi</td><td class="mono na">n/d</td><td class="mono r">0,82%</td></tr>
+            <tr class="total"><td>Total</td><td class="mono">R$ 85,5 bi</td><td class="mono">R$ 36,2 bi</td><td class="mono">—</td><td class="mono">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <a class="src" href="#">Central de Resultados — RI Claro</a>
+    <a class="src" href="#">Arquivamentos 20-F (SEC)</a>
+  </section>
+
+  <!-- 02 · BREAKDOWN -->
+  <section>
+    <p class="s-num">02 · Barras de composição</p>
+    <h3 class="s-title">Do que são feitos os R$ 377,1 milhões</h3>
+    <p class="s-desc">A maior parte <strong>não é imposto principal</strong>: <span class="t-amber">62% são juros</span>.</p>
+    <div class="card"><div class="brk" id="brk"></div></div>
+  </section>
+
+  <!-- 03 · DUAS COLUNAS + PILLS -->
+  <section>
+    <p class="s-num">03 · Duas colunas, pills e notas</p>
+    <h3 class="s-title">Tabelas lado a lado e cards de nota</h3>
+    <div class="cols">
+      <div class="card">
+        <div class="tbl-scroll">
+          <table>
+            <caption>Situação processual.</caption>
+            <thead><tr><th>Processo (CNJ)</th><th>Valor</th><th>Situação</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">1577892-39.2017.8.26.0090</td><td class="mono r">R$ 188,6 mi</td><td><span class="pill">EXECUÇÃO</span></td></tr>
+              <tr><td class="mono">1577893-24.2017.8.26.0090</td><td class="mono">R$ 37,4 mi</td><td><span class="pill amber">SUSPENSO</span></td></tr>
+              <tr><td class="mono">1613801-45.2017.8.26.0090</td><td class="mono">R$ 33,3 mi</td><td><span class="pill red">VENCIDO</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card note">
+        <p class="k-label">Exigibilidade</p>
+        <p>20 débitos com <strong>suspensão judicial</strong> (R$ 77,0 mi); <strong class="t-green">0 em parcelamento</strong>. “Dever R$ X” não significa “R$ X cobrável hoje”.</p>
+        <p class="t-amber">Obs.: ressalvas e correções sempre em âmbar.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- FUNDAMENTOS (documentação visual) -->
+  <section>
+    <p class="s-num">A · Cores</p>
+    <h3 class="s-title">Paleta</h3>
+    <div class="swatches">
+      <div class="swatch"><i style="background:var(--bg)"></i><p><b>--bg</b>#080b09</p></div>
+      <div class="swatch"><i style="background:var(--panel)"></i><p><b>--panel</b>#0d1310</p></div>
+      <div class="swatch"><i style="background:var(--panel-2)"></i><p><b>--panel-2</b>#0a0f0c</p></div>
+      <div class="swatch"><i style="background:var(--green)"></i><p><b>--green</b>#37d97f</p></div>
+      <div class="swatch"><i style="background:var(--green-dim)"></i><p><b>--green-dim</b>#1f6b45</p></div>
+      <div class="swatch"><i style="background:var(--blue)"></i><p><b>--blue</b>#4cb5f5</p></div>
+      <div class="swatch"><i style="background:var(--amber)"></i><p><b>--amber</b>#f2c14e</p></div>
+      <div class="swatch"><i style="background:var(--red)"></i><p><b>--red</b>#f2584b</p></div>
+      <div class="swatch"><i style="background:var(--ink)"></i><p><b>--ink</b>#e9f2ec</p></div>
+      <div class="swatch"><i style="background:var(--ink-2)"></i><p><b>--ink-2</b>#93a49b</p></div>
+      <div class="swatch"><i style="background:var(--muted)"></i><p><b>--muted</b>#5d6b63</p></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="s-num">B · Tipografia</p>
+    <h3 class="s-title">Escala</h3>
+    <div class="card">
+      <div class="type-row"><code>eyebrow · mono .72</code><p class="eyebrow" style="margin:0">CPI · CMSP · 19ª Legislatura</p></div>
+      <div class="type-row"><code>h1 · sans clamp</code><h1 style="margin:0">Débitos junto ao Município</h1></div>
+      <div class="type-row"><code>hero · mono clamp</code><p style="margin:0;font-family:var(--mono);font-size:var(--fs-hero);font-weight:700;color:var(--red);line-height:1">R$ 377,1</p></div>
+      <div class="type-row"><code>s-title · sans 1.25</code><h3 class="s-title" style="margin:0">Por tributo e por fase</h3></div>
+      <div class="type-row"><code>k-val · mono 1.5</code><p style="margin:0;font-family:var(--mono);font-size:var(--fs-kpi);font-weight:700;color:var(--green)">99,3%</p></div>
+      <div class="type-row"><code>lead · sans .98</code><p class="lead">Subsídio técnico para negociação direta.</p></div>
+      <div class="type-row"><code>k-label · mono .66</code><p class="k-label" style="margin:0">Rubrica dominante</p></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="s-num">C · Marca</p>
+    <h3 class="s-title">Logos</h3>
+    <div class="brand">
+      <img src="logos/mark.svg" width="64" height="64" alt="Marca Painel CPI">
+      <img src="logos/wordmark-dark.svg" width="348" height="72" alt="CPI · Dívida Ativa — CMSP">
+      <span class="light"><img src="logos/wordmark-light.svg" width="348" height="72" alt="CPI · Dívida Ativa — CMSP (fundo claro)"></span>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <h4>Fontes</h4>
+    <ol>
+      <li>Planilha SEFAZ/PMSP — base D31284 (extração 2026).</li>
+      <li>Central de Resultados / RI Claro e arquivamentos 20-F na SEC.</li>
+    </ol>
+    <p class="warn">Uso interno — dados sob sigilo fiscal. Confira no e-SAJ/TJSP antes de citar em juízo.</p>
+    <p>CPI dos Grandes Devedores da Dívida Ativa — CMSP · Documento de trabalho.</p>
+  </footer>
+</div>
+
+<script src="charts.js"></script>
+<script>
+  PainelCPI.groupedBarChart(document.getElementById('chart'), {
+    categories: [2020, 2021, 2022, 2023, 2024],
+    series: [
+      { data: [39.46, 39.72, 42.66, 45.76, 48.90], color: 'var(--green)' },
+      { data: [16.05, 16.53, 17.99, 19.67, 21.70], color: 'var(--blue)' }
+    ],
+    yMax: 55, yStep: 10, unit: 'R$ bi',
+    refLine: { value: 0.3771, label: 'DÍVIDA SP · R$ 0,38 bi' }
+  });
+  PainelCPI.breakdownBars(document.getElementById('brk'), [
+    { n: 'Juros',            v: 234000063.86, c: 'var(--amber)' },
+    { n: 'Valor principal',  v: 66502663.72,  c: 'var(--green)' },
+    { n: 'Multa',            v: 41448342.54,  c: 'var(--red)' },
+    { n: 'Honorários',       v: 34002601.64,  c: 'var(--blue)' },
+    { n: 'Custas judiciais', v: 1167887.85,   c: 'var(--ink-2)' },
+    { n: 'Despesas',         v: 49.70,        c: 'var(--muted)' }
+  ], 377121609.31);
+</script>
+</body>
+</html>
